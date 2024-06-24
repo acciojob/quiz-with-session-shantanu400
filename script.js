@@ -81,6 +81,8 @@ let userAnswers = JSON.parse(sessionStorage.getItem('progress')) || [];
       const choice = question.choices[j];
       if (userAnswers[i] === choice) {
         choiceElement.setAttribute("checked", true);
+		 choiceElement.setAttribute("type", radio);
+		  
 		  score++;
       }
 		else{
