@@ -72,22 +72,14 @@ function renderQuestions() {
 let questionsElement = document.getElementById('questions');
 renderQuestions();
 
-document.getElementById('submit').addEventListener('click',function(){
-	// alert('wah kya baat hai!!!!...')
-let userAnswers = JSON.parse(sessionStorage.getItem('progress')) || [];
-	 let score=0;
-    for (let j = 0; j < question.choices.length; j++) {
-	 const question = questions[i];
-      const choice = question.choices[j];
-      if (userAnswers[i] === choice) {
-        choiceElement.setAttribute("checked", true);
-		 choiceElement.setAttribute("type", radio);
-		  
-		  score++;
-      }
-		else{
-			continue;
-		}
-		localStorage.setItem("score", score);
-		}
-})
+document.getElementById('submit').addEventListener('click', function(){
+    let userAnswers = JSON.parse(sessionStorage.getItem('progress')) || [];
+    let score = 0;
+    for (let i = 0; i < questions.length; i++) {
+        if (userAnswers[i] === questions[i].answer) {
+            score++;
+        }
+    }
+    localStorage.setItem("score", score);
+    document.getElementById('score').innerText = "Your score is " + score + " out of 5.";
+});
