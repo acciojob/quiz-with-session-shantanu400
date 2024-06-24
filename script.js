@@ -30,7 +30,23 @@ const questions = [
   },
 ];
 
-// Display the quiz questions and choices
+
+
+
+
+
+
+
+function saveProgress(){
+	let progress=[];
+	for(let i=0;i<questions.length;i++){
+		let selectedOption=document.querySelector(`input[name="question-${i}"]:checked`);
+		progress[i]=selectedOption? selectedOption.value:null;
+	}
+	sessionStorage.setItem('progress',JSON.stringify(progress));
+}
+
+
 function renderQuestions() {
   for (let i = 0; i < questions.length; i++) {
     const question = questions[i];
@@ -43,15 +59,31 @@ function renderQuestions() {
       choiceElement.setAttribute("type", "radio");
       choiceElement.setAttribute("name", `question-${i}`);
       choiceElement.setAttribute("value", choice);
-      if (userAnswers[i] === choice) {
-        choiceElement.setAttribute("checked", true);
-      }
       const choiceText = document.createTextNode(choice);
       questionElement.appendChild(choiceElement);
       questionElement.appendChild(choiceText);
+	choiceElement.addEventListener('change', saveProgress);
     }
     questionsElement.appendChild(questionElement);
   }
+
 }
+
 let questionsElement = document.getElementById('questions');
 renderQuestions();
+
+documnet.getElementById('submit').addEventListener('click',function(){
+let userAnswers = JSON.parse(sessionStorage.getItem('progress')) || [];
+	 let score=0;
+    for (let j = 0; j < question.choices.length; j++) {
+      const choice = question.choices[j];
+      if (userAnswers[i] === choice) {
+        choiceElement.setAttribute("checked", true);
+		  score++;
+      }
+		else{
+			continue;
+		}
+		localStorage.setItem("score", score);
+		}
+})
