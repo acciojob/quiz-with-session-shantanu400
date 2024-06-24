@@ -72,10 +72,12 @@ function renderQuestions() {
 let questionsElement = document.getElementById('questions');
 renderQuestions();
 
-documnet.getElementById('submit').addEventListener('click',function(){
+document.getElementById('submit').addEventListener('click',function(){
+	// alert('wah kya baat hai!!!!...')
 let userAnswers = JSON.parse(sessionStorage.getItem('progress')) || [];
 	 let score=0;
     for (let j = 0; j < question.choices.length; j++) {
+	 const question = questions[i];
       const choice = question.choices[j];
       if (userAnswers[i] === choice) {
         choiceElement.setAttribute("checked", true);
